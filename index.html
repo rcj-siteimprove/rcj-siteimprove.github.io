@@ -2,6 +2,12 @@
 <head>
   <title>Hello</title>
 </head>
-<body>
+<body id="body">
   <h1>Hello, World</h1>
+  <button onclick="changeBackground()">Change Background</button>
+  <script>
+    function changeBackground() {
+      document.getElementById("body").style.backgroundColor = "purple";
+    }
+  </script>
 </body>
