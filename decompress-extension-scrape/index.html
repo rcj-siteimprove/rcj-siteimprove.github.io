@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decompress Page Scrape</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .input-output {
+        width: 100%;
+        height: 300px;
+        font-size: 20px;
+      }
+
+      .button-container {
+        position: relative;
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 24px;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .button-container:hover .copy-button {
+        opacity: 1;
+      }
+
+      button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 10px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Decompress Page Scrape</h1>
+    <textarea
+      id="inputField"
+      class="input-output"
+      placeholder="Enter compressed page scrape here"
+    ></textarea>
+    <br />
+    <button id="decompressButton">Decompress</button>
+    <br />
+    <div class="button-container">
+      <textarea
+        id="outputField"
+        class="input-output"
+        readonly
+        placeholder="Decompressed text will appear here"
+      ></textarea>
+      <button class="copy-button" id="copyButton">📋</button>
+    </div>
+
+    <script type="module">
+      import { ungzip } from "./pako.esm.mjs";
+
+      function decompress() {
+        var inputText = document.getElementById("inputField").value;
+        var outputText = JSON.stringify(
+          JSON.parse(decompressText(inputText)),
+          null,
+          2,
+        );
+        document.getElementById("outputField").value = outputText;
+      }
+
+      function decompressText(text) {
+        const cleanedStr = text
+          .split("\n")
+          .filter((line) => !line.startsWith("---"))
+          .join("\n");
+        const base64Decoded = atob(cleanedStr);
+
+        const bytes = new Uint8Array(
+          base64Decoded.split("").map((char) => char.charCodeAt(0)),
+        );
+        const gunzippedBytes = ungzip(bytes);
+        const decoder = new TextDecoder();
+
+        return decoder.decode(gunzippedBytes);
+      }
+
+      function copyToClipboard() {
+        const outputField = document.getElementById("outputField");
+        outputField.select();
+        document.execCommand("copy");
+
+        const copyButton = document.getElementById("copyButton");
+        copyButton.innerHTML = "✅";
+        copyButton.style.color = "green";
+
+        setTimeout(() => {
+          copyButton.innerHTML = "📋";
+          copyButton.style.color = "";
+        }, 2000); // Change back after 2 seconds
+      }
+
+      document
+        .getElementById("decompressButton")
+        .addEventListener("click", decompress);
+      document
+        .getElementById("copyButton")
+        .addEventListener("click", copyToClipboard);
+    </script>
+  </body>
+</html>

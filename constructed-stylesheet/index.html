@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow DOM Navigation Menu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <nav-menu></nav-menu>
+    <main id="main">
+      <h1>Constructed Stylesheet Issue</h1>
+      <p>
+        Submenu 1 gets flagged for bad color constrast when it's
+        <b>not</b> displayed.
+      </p>
+      <p>
+        Submenu 2 doesn't get flagged for bad color constrast even when it
+        <b>is</b> displayed.
+      </p>
+    </main>
+    <script type="module">
+      class NavMenu extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: "open" });
+          this.shadowRoot.innerHTML = `
+            <style>
+                nav {
+                    background: #333;
+                    color: #fff;
+                    padding: 1em;
+                }
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                li {
+                    cursor: pointer;
+                    padding: 0.5em;
+                }
+                li:hover {
+                    background: #444;
+                }
+                #submenu1 {
+                    color: #000;
+                }
+            </style>
+            <nav>
+                <ul>
+                    <li id="menu1">Menu 1
+                        <ul class="submenu" id="submenu1">
+                            <li>Submenu 1</li>
+                        </ul>
+                    </li>
+                    <li id="menu2">Menu 2
+                        <ul class="submenu" id="submenu2">
+                            <li>Submenu 2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        `;
+
+          const sheet = new CSSStyleSheet();
+          this.shadowRoot.adoptedStyleSheets = [sheet];
+          sheet.insertRule(".submenu { display: none; padding-left: 1em; }");
+          sheet.insertRule(".submenu.visible { display: block; }");
+          sheet.insertRule("#submenu2 { color: #000; }");
+        }
+
+        connectedCallback() {
+          this.shadowRoot.querySelectorAll("li").forEach((menuItem) => {
+            menuItem.addEventListener("click", this.toggleSubmenu.bind(this));
+          });
+        }
+
+        toggleSubmenu(event) {
+          const submenu = event.target.querySelector(".submenu");
+          if (submenu) {
+            submenu.classList.toggle("visible");
+          }
+        }
+      }
+
+      customElements.define("nav-menu", NavMenu);
+    </script>
+  </body>
+</html>

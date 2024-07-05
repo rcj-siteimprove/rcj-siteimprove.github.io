@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        margin: 5px;
+      }
+
+      /* Fix button relative to body */
+      body {
+        position: relative;
+      }
+
+      button {
+        position: absolute;
+        bottom: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>There should be only one visible div on this page</div>
+    <button>Don't move me!</button>
+  </body>
+</html>
