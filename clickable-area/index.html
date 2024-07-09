@@ -1,0 +1,27 @@
+<!doctype html>
+<title>Clickable Area</title>
+<style>
+  button {
+    position: absolute;
+    left: 544px;
+    width: 20px;
+    height: 20px;
+  }
+  img {
+    float: left;
+  }
+</style>
+<a href="/" title="Go to home page">
+  <img
+    src="https://picsum.photos/id/237/536/354"
+    alt="Black puppy looking up"
+  />
+</a>
+<button>x</button>
+<br />
+<p>
+  The x-button is undersized and too close to the image, but it doesn't fail
+  R113 because Alfa sees the clickable area as the bounding box of the anchor
+  tag which doesn't correspond to the actual clickable area which includes the
+  image.
+</p>
