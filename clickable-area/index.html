@@ -1,27 +1,40 @@
 <!doctype html>
 <title>Clickable Area</title>
 <style>
+  body {
+    line-height: 1.5;
+  }
   button {
     position: absolute;
+    top: 8px;
     left: 544px;
     width: 20px;
     height: 20px;
   }
-  img {
-    float: left;
-  }
 </style>
-<a href="/" title="Go to home page">
-  <img
-    src="https://picsum.photos/id/237/536/354"
-    alt="Black puppy looking up"
-  />
-</a>
+<div>
+  <a href="/" title="Go to home page">
+    <img
+      src="https://picsum.photos/id/237/536/354"
+      alt="Black puppy looking up"
+    />
+  </a>
+</div>
 <button>x</button>
-<br />
-<p>
-  The x-button is undersized and too close to the image, but it doesn't fail
-  R113 because Alfa sees the clickable area as the bounding box of the anchor
-  tag which doesn't correspond to the actual clickable area which includes the
-  image.
-</p>
+<ol>
+  <li>
+    The x-button is undersized and too close to the image. It should
+    <b>fail</b> R113, but currently doesn't because Alfa sees the clickable area
+    of the image as the bounding box of the anchor tag which doesn't correspond
+    to the actual clickable area and is positioned far enough away from the
+    button.
+  </li>
+  <li>
+    The image should <b>pass</b> R111, but currently it fails because it uses
+    only the bounding box of the anchor tag which is too small.
+  </li>
+  <li>
+    The x-button should <b>fail</b> R111 because it's too small, and it
+    currently correctly does so.
+  </li>
+</ol>
