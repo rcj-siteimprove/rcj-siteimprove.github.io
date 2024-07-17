@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallery</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .gallery {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .gallery.expanded {
+        height: auto;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gallery">
+      <a href="#foo">
+        <figure>
+          <img src="https://picsum.photos/200/300" />
+        </figure>
+      </a>
+    </div>
+    <button id="expand-button">Show More</button>
+    <script>
+      const gallery = document.querySelector(".gallery");
+      const button = document.getElementById("expand-button");
+
+      button.addEventListener("click", function () {
+        gallery.classList.toggle("expanded");
+        if (button.textContent === "Show More") {
+          button.textContent = "Show Less";
+        } else {
+          button.textContent = "Show More";
+        }
+      });
+    </script>
+  </body>
+</html>
