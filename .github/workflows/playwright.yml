@@ -13,7 +13,10 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - run: npm config set //npm.pkg.github.com/:_authToken=${ github.token }
+    - name: Authenticate packages
+      env: 
+        PAT: ${{ secrets.PAT }}
+      run: npm config set //npm.pkg.github.com/:_authToken=$PAT
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
