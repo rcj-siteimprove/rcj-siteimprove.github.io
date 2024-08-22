@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "http-server",
+    "test": "node tests/accessibility.spec.js"
+  },
+  "devDependencies": {
+    "@siteimprove/alfa-puppeteer": "^0.70.0",
+    "@siteimprove/alfa-test-utils": "^0.70.0",
+    "http-server": "^14.1.1",
+    "puppeteer": "^23.1.1"
+  }
+}
