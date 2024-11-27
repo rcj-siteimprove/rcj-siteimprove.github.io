@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Target-Size Visualizer</title>
+  </head>
+  <body>
+    <form method="get" action="">
+      <label for="rects">Rectangles:</label><br />
+      <textarea id="rects" name="rects" rows="4" cols="40"></textarea><br />
+
+      <label for="scale">Scale:</label><br />
+      <input type="text" id="scale" name="scale" /><br />
+      <br />
+      <input type="submit" value="Update" />
+    </form>
+    <br />
+    <canvas id="canvas"></canvas>
+    <script>
+      class Rectangle {
+        constructor(x, y, width, height) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+        }
+
+        get right() {
+          return this.x + this.width;
+        }
+
+        get bottom() {
+          return this.y + this.height;
+        }
+
+        get cx() {
+          return this.x + this.width / 2;
+        }
+
+        get cy() {
+          return this.y + this.height / 2;
+        }
+      }
+      const params = new URL(document.location).searchParams;
+      const rectsParam = params.get("rects") ?? "8,8,100,20,8,30,200,10";
+      const scale = parseFloat(params.get("scale") ?? 1);
+
+      document.getElementById("rects").value = rectsParam;
+      document.getElementById("scale").value = scale;
+
+      const rectsValues = rectsParam
+        .split(",")
+        .map((value) => parseFloat(value) * scale);
+
+      let rects = [];
+      for (let i = 3; i < rectsValues.length; i = i + 4) {
+        rects.push(
+          new Rectangle(
+            rectsValues[i - 3],
+            rectsValues[i - 2],
+            rectsValues[i - 1],
+            rectsValues[i - 0],
+          ),
+        );
+      }
+
+      const radius = 12 * scale;
+
+      const width =
+        Math.ceil(Math.max(...rects.map((rect) => rect.right))) + 50;
+      const height =
+        Math.ceil(Math.max(...rects.map((rect) => rect.bottom))) + 50;
+
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = Math.max(800, width);
+      canvas.height = Math.max(600, height);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#202020";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (const rect of rects) {
+        ctx.strokeStyle = "#FFFF99";
+        ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+
+        ctx.beginPath();
+        ctx.arc(rect.cx, rect.cy, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+      }
+    </script>
+  </body>
+</html>
