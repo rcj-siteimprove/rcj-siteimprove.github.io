@@ -48,7 +48,7 @@
       document.getElementById("scale").value = scale;
 
       const rectsValues = rectsParam
-        .split(",")
+        .split(/[\n,]/)
         .map((value) => parseFloat(value) * scale);
 
       let rects = [];
