@@ -23,36 +23,42 @@
         background-color: #dddddd;
       }
 
-      #masked {
+      .container {
+        border: 1px solid;
         width: 300px;
-        background: blue linear-gradient(red, blue);
-        margin-bottom: 10px;
+        height: 300px;
+        resize: both;
+        overflow: hidden;
+      }
+
+      #masked {
+        background: red linear-gradient(pink, cyan);
       }
     </style>
   </head>
   <body>
-    <div id="masked">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper
-        metus felis. In vitae sapien elit. Integer ullamcorper magna vel sem
-        sollicitudin, a dignissim dui volutpat. Nullam eu ipsum maximus, iaculis
-        quam a, posuere tortor. Mauris mattis eget odio ac tincidunt. Nulla
-        consectetur enim sit amet mattis finibus. Duis nec diam enim. Cras
-        rutrum ante velit, sit amet auctor velit semper vestibulum. Quisque non
-        fringilla dolor, sit amet rutrum velit. Aenean tincidunt tristique
-        lacus, ut pharetra libero ornare et. Morbi non vehicula libero. Proin ut
-        metus vitae arcu eleifend feugiat in nec lacus.
-      </p>
+    <div class="container">
+      <div id="masked"></div>
     </div>
 
     <hr />
 
     <form method="get" action="">
-      <input type="checkbox" id="star" name="star" />
-      <label for="star">star</label>
+      <code>mask-image: </code>
+      <input type="checkbox" id="tree" name="tree" />
+      <label for="tree">tree</label>
 
-      <input type="checkbox" id="circle" name="circle" />
-      <label for="circle">circle</label><br />
+      <input type="checkbox" id="ornament" name="ornament" />
+      <label for="ornament">ornament</label>
+
+      <input type="checkbox" id="gingerbread" name="gingerbread" />
+      <label for="gingerbread">gingerbread</label>
+
+      <input type="checkbox" id="heart" name="heart" />
+      <label for="heart">heart</label><br />
+
+      <label for="clip"><code>mask-clip:</code></label>
+      <input type="text" id="clip" name="clip" /><br />
 
       <label for="repeat"><code>mask-repeat:</code></label>
       <input type="text" id="repeat" name="repeat" /><br />
@@ -61,6 +67,7 @@
     </form>
 
     <hr />
+
     <table id="computed">
       <tr>
         <th>Property</th>
@@ -68,38 +75,6 @@
       </tr>
     </table>
 
-    <script>
-      const params = new URL(document.location).searchParams;
-      repeat.value = params.get("repeat");
-
-      star.checked = params.get("star") !== null;
-      circle.checked = params.get("circle") !== null;
-
-      masked.style.maskRepeat = repeat.value;
-
-      const images = [];
-      if (star.checked) {
-        images.push("url(mask-star.svg)");
-      }
-
-      if (circle.checked) {
-        images.push("url(mask-circle.svg)");
-      }
-
-      if (images.length > 0) {
-        masked.style.maskImage = images.join(", ");
-      }
-
-      addRow("mask-image");
-      addRow("mask-repeat");
-
-      function addRow(name) {
-        const row = computed.insertRow();
-        row.insertCell(0).append(name);
-        row
-          .insertCell(1)
-          .append(window.getComputedStyle(masked).getPropertyValue(name));
-      }
-    </script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
