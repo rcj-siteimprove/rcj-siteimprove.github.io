@@ -5,9 +5,13 @@ const ornament = document.getElementById("ornament");
 const gingerbread = document.getElementById("gingerbread");
 const heart = document.getElementById("heart");
 
-const repeat = document.getElementById("repeat");
 const clip = document.getElementById("clip");
 const composite = document.getElementById("composite");
+const mode = document.getElementById("mode");
+const origin = document.getElementById("origin");
+const position = document.getElementById("position");
+const repeat = document.getElementById("repeat");
+const size = document.getElementById("size");
 
 const masked = document.getElementById("masked");
 const computed = document.getElementById("computed");
@@ -16,14 +20,6 @@ tree.checked = params.get("tree") !== null;
 ornament.checked = params.get("ornament") !== null;
 gingerbread.checked = params.get("gingerbread") !== null;
 heart.checked = params.get("heart") !== null;
-
-repeat.value = params.get("repeat");
-clip.value = params.get("clip");
-composite.value = params.get("composite");
-
-masked.style.maskRepeat = repeat.value;
-masked.style.maskClip = clip.value;
-masked.style.maskComposite = composite.value;
 
 const images = [];
 if (tree.checked) {
@@ -42,10 +38,30 @@ if (images.length > 0) {
   masked.style.maskImage = images.join(", ");
 }
 
+clip.value = params.get("clip");
+composite.value = params.get("composite");
+mode.value = params.get("mode");
+origin.value = params.get("origin");
+position.value = params.get("position");
+repeat.value = params.get("repeat");
+size.value = params.get("size");
+
+masked.style.maskClip = clip.value;
+masked.style.maskComposite = composite.value;
+masked.style.maskMode = mode.value;
+masked.style.maskOrigin = origin.value;
+masked.style.maskPosition = position.value;
+masked.style.maskRepeat = repeat.value;
+masked.style.maskSize = size.value;
+
 addRow("mask-image");
 addRow("mask-clip");
-addRow("mask-repeat");
 addRow("mask-composite");
+addRow("mask-mode");
+addRow("mask-origin");
+addRow("mask-position");
+addRow("mask-repeat");
+addRow("mask-size");
 
 function addRow(name) {
   const row = computed.insertRow();
