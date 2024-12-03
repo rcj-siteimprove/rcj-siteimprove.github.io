@@ -2,39 +2,8 @@
 <html lang="en">
   <head>
     <title>CSS Mask</title>
-    <style>
-      body {
-        font-family: arial, sans-serif;
-      }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      td,
-      th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-      }
-
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-
-      .container {
-        border: 1px solid;
-        width: 300px;
-        height: 300px;
-        resize: both;
-        overflow: hidden;
-      }
-
-      #masked {
-        background: red linear-gradient(pink, cyan);
-      }
-    </style>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
     <div class="container">
@@ -44,26 +13,57 @@
     <hr />
 
     <form method="get" action="">
-      <code>mask-image: </code>
-      <input type="checkbox" id="tree" name="tree" />
-      <label for="tree">tree</label>
+      <div class="row">
+        <div class="cell">
+          <code>mask-image: </code>
+        </div>
+        <div class="cell">
+          <input type="checkbox" id="tree" name="tree" />
+          <label for="tree">tree</label>
 
-      <input type="checkbox" id="ornament" name="ornament" />
-      <label for="ornament">ornament</label>
+          <input type="checkbox" id="ornament" name="ornament" />
+          <label for="ornament">ornament</label>
 
-      <input type="checkbox" id="gingerbread" name="gingerbread" />
-      <label for="gingerbread">gingerbread</label>
+          <input type="checkbox" id="gingerbread" name="gingerbread" />
+          <label for="gingerbread">gingerbread</label>
 
-      <input type="checkbox" id="heart" name="heart" />
-      <label for="heart">heart</label><br />
+          <input type="checkbox" id="heart" name="heart" />
+          <label for="heart">heart</label><br />
+        </div>
+      </div>
 
-      <label for="clip"><code>mask-clip:</code></label>
-      <input type="text" id="clip" name="clip" /><br />
+      <div class="row">
+        <div class="cell">
+          <label for="clip"><code>mask-clip:</code></label>
+        </div>
+        <div class="cell">
+          <input type="text" id="clip" name="clip" /><br />
+        </div>
+      </div>
 
-      <label for="repeat"><code>mask-repeat:</code></label>
-      <input type="text" id="repeat" name="repeat" /><br />
+      <div class="row">
+        <div class="cell">
+          <label for="repeat"><code>mask-repeat:</code></label>
+        </div>
+        <div class="cell">
+          <input type="text" id="repeat" name="repeat" /><br />
+        </div>
+      </div>
 
-      <input type="submit" value="Update" />
+      <div class="row">
+        <div class="cell">
+          <label for="composite"><code>mask-composite:</code></label>
+        </div>
+        <div class="cell">
+          <input type="text" id="composite" name="composite" /><br />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="cell">
+          <input type="submit" value="Update" />
+        </div>
+      </div>
     </form>
 
     <hr />

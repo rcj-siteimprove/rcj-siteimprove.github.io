@@ -1,0 +1,43 @@
+body {
+  font-family: arial, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.container {
+  border: 1px solid;
+  width: 300px;
+  height: 300px;
+  resize: both;
+  overflow: hidden;
+}
+
+#masked {
+  background: red linear-gradient(pink, cyan);
+}
+
+form {
+  display: table;
+}
+
+div.row {
+  display: table-row;
+}
+
+div.cell {
+  display: table-cell;
+}
