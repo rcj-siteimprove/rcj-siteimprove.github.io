@@ -5,6 +5,7 @@ const ornament = document.getElementById("ornament");
 const gingerbread = document.getElementById("gingerbread");
 const heart = document.getElementById("heart");
 
+const mask = document.getElementById("mask");
 const clip = document.getElementById("clip");
 const composite = document.getElementById("composite");
 const mode = document.getElementById("mode");
@@ -34,10 +35,8 @@ if (gingerbread.checked) {
 if (heart.checked) {
   images.push("url(heart.svg)");
 }
-if (images.length > 0) {
-  masked.style.maskImage = images.join(", ");
-}
 
+mask.value = params.get("mask");
 clip.value = params.get("clip");
 composite.value = params.get("composite");
 mode.value = params.get("mode");
@@ -46,13 +45,20 @@ position.value = params.get("position");
 repeat.value = params.get("repeat");
 size.value = params.get("size");
 
-masked.style.maskClip = clip.value;
-masked.style.maskComposite = composite.value;
-masked.style.maskMode = mode.value;
-masked.style.maskOrigin = orig.value;
-masked.style.maskPosition = position.value;
-masked.style.maskRepeat = repeat.value;
-masked.style.maskSize = size.value;
+if (mask.value !== null) {
+  masked.style.mask = mask.value;
+} else {
+  if (images.length > 0) {
+    masked.style.maskImage = images.join(", ");
+  }
+  masked.style.maskClip = clip.value;
+  masked.style.maskComposite = composite.value;
+  masked.style.maskMode = mode.value;
+  masked.style.maskOrigin = orig.value;
+  masked.style.maskPosition = position.value;
+  masked.style.maskRepeat = repeat.value;
+  masked.style.maskSize = size.value;
+}
 
 addRow("mask-image");
 addRow("mask-clip");
