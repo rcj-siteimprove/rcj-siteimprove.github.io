@@ -8,7 +8,7 @@ const heart = document.getElementById("heart");
 const clip = document.getElementById("clip");
 const composite = document.getElementById("composite");
 const mode = document.getElementById("mode");
-const origin = document.getElementById("origin");
+const orig = document.getElementById("origin");
 const position = document.getElementById("position");
 const repeat = document.getElementById("repeat");
 const size = document.getElementById("size");
@@ -41,7 +41,7 @@ if (images.length > 0) {
 clip.value = params.get("clip");
 composite.value = params.get("composite");
 mode.value = params.get("mode");
-origin.value = params.get("origin");
+orig.value = params.get("origin");
 position.value = params.get("position");
 repeat.value = params.get("repeat");
 size.value = params.get("size");
@@ -49,7 +49,7 @@ size.value = params.get("size");
 masked.style.maskClip = clip.value;
 masked.style.maskComposite = composite.value;
 masked.style.maskMode = mode.value;
-masked.style.maskOrigin = origin.value;
+masked.style.maskOrigin = orig.value;
 masked.style.maskPosition = position.value;
 masked.style.maskRepeat = repeat.value;
 masked.style.maskSize = size.value;
@@ -62,6 +62,7 @@ addRow("mask-origin");
 addRow("mask-position");
 addRow("mask-repeat");
 addRow("mask-size");
+addRow("mask");
 
 function addRow(name) {
   const row = computed.insertRow();
