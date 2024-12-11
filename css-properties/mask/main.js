@@ -45,7 +45,7 @@ position.value = params.get("position");
 repeat.value = params.get("repeat");
 size.value = params.get("size");
 
-if (mask.value !== null) {
+if (mask.value) {
   masked.style.mask = mask.value;
 } else {
   if (images.length > 0) {
